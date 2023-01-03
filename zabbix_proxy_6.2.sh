@@ -17,14 +17,14 @@ then
   if [[ $(grep -Ei 'centos.* 7' /etc/*release) ]]
   then
     # Install Zabbix proxy & MariaDB on CentOS 7
-	clear
+    clear
     setenforce 0 && sed -i 's/^SELINUX=.*/SELINUX=permissive/g' /etc/selinux/config
-	rpm -Uvh https://repo.zabbix.com/zabbix/6.2/rhel/$(rpm -E %{rhel})/x86_64/zabbix-release-6.2-3.el$(rpm -E %{rhel}).noarch.rpm
-	curl -s https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash /dev/stdin --mariadb-server-version=10.6
-	clear
+    rpm -Uvh https://repo.zabbix.com/zabbix/6.2/rhel/$(rpm -E %{rhel})/x86_64/zabbix-release-6.2-3.el$(rpm -E %{rhel}).noarch.rpm
+    curl -s https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash /dev/stdin --mariadb-server-version=10.6
+    clear
     yum install -y zabbix-proxy-mysql zabbix-sql-scripts zabbix-selinux-policy mariadb-server
     systemctl start mariadb && systemctl enable mariadb
-	clear
+    clear
     
     # Connect to MySQL and create the zabbix_proxy database
     mysql -u root <<EOF
@@ -53,19 +53,19 @@ EOF
     sed -i "s/# DBPassword=/DBPassword=zabbix/g" /etc/zabbix/zabbix_proxy.conf
   
     systemctl start zabbix-proxy && systemctl enable zabbix-proxy
-	clear
+    clear
     systemctl status zabbix-proxy
   elif [[ $(grep -Ei 'centos.* 8' /etc/*release) ]]
   then
     # Install Zabbix proxy & MariaDB on CentOS 8
-	clear
+    clear
     setenforce 0 && sed -i 's/^SELINUX=.*/SELINUX=permissive/g' /etc/selinux/config
-	rpm -Uvh https://repo.zabbix.com/zabbix/6.2/rhel/$(rpm -E %{rhel})/x86_64/zabbix-release-6.2-3.el$(rpm -E %{rhel}).noarch.rpm
+    rpm -Uvh https://repo.zabbix.com/zabbix/6.2/rhel/$(rpm -E %{rhel})/x86_64/zabbix-release-6.2-3.el$(rpm -E %{rhel}).noarch.rpm
     curl -s https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash /dev/stdin --mariadb-server-version=10.6
-	clear
+    clear
     yum install -y zabbix-proxy-mysql zabbix-sql-scripts zabbix-selinux-policy mariadb-server
     systemctl start mariadb && systemctl enable mariadb
-	clear
+    clear
 	
     # Connect to MySQL and create the zabbix_proxy database
     mysql -u root <<EOF
@@ -94,7 +94,7 @@ EOF
     sed -i "s/# DBPassword=/DBPassword=zabbix/g" /etc/zabbix/zabbix_proxy.conf
   
     systemctl start zabbix-proxy && systemctl enable zabbix-proxy
-	clear
+    clear
     systemctl status zabbix-proxy
   else
     echo "Unsupported version of CentOS"
@@ -115,7 +115,7 @@ then
   systemctl start mariadb && systemctl enable mariadb
   clear
   
-	# Connect to MySQL and create the zabbix_proxy database
+    # Connect to MySQL and create the zabbix_proxy database
   mysql -u root <<EOF
 	CREATE DATABASE zabbix_proxy CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 	GRANT ALL PRIVILEGES ON zabbix_proxy.* TO zabbix@localhost IDENTIFIED BY 'zabbix';
