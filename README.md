@@ -17,6 +17,10 @@ To use command line arguments, simply provide the script name and the IP address
 
 Zabbix Proxy Script requires a Ubuntu or CentOS7/8 operating system, depending on which platform you're using.
 
+```sh
+First grant executable permissions using chmod +x zabbix_proxy_6.2.sh
+```
+
 To launch the script:
 
 ```sh
