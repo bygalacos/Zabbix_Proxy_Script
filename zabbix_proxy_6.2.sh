@@ -52,7 +52,7 @@ EOF
     sed -i "s/# DBHost=localhost/DBHost=localhost/g" /etc/zabbix/zabbix_proxy.conf
     sed -i "s/# DBPassword=/DBPassword=zabbix/g" /etc/zabbix/zabbix_proxy.conf
   
-    systemctl start zabbix-proxy && systemctl enable zabbix-proxy
+    systemctl restart zabbix-proxy && systemctl enable zabbix-proxy
     clear
     systemctl status zabbix-proxy
   elif [[ $(grep -Ei 'centos.* 8' /etc/*release) ]]
@@ -93,7 +93,7 @@ EOF
     sed -i "s/# DBHost=localhost/DBHost=localhost/g" /etc/zabbix/zabbix_proxy.conf
     sed -i "s/# DBPassword=/DBPassword=zabbix/g" /etc/zabbix/zabbix_proxy.conf
   
-    systemctl start zabbix-proxy && systemctl enable zabbix-proxy
+    systemctl restart zabbix-proxy && systemctl enable zabbix-proxy
     clear
     systemctl status zabbix-proxy
   else
@@ -141,7 +141,7 @@ EOF
   sed -i "s/# DBHost=localhost/DBHost=localhost/g" /etc/zabbix/zabbix_proxy.conf
   sed -i "s/# DBPassword=/DBPassword=zabbix/g" /etc/zabbix/zabbix_proxy.conf
   
-  systemctl start zabbix-proxy && systemctl enable zabbix-proxy
+  systemctl restart zabbix-proxy && systemctl enable zabbix-proxy
   clear
   systemctl status zabbix-proxy
 else
