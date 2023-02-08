@@ -15,7 +15,7 @@ To use command line arguments, simply provide the script name and the IP address
 
 ## Usage
 
-Zabbix Proxy Script requires a Ubuntu or CentOS7/8 operating system, depending on which platform you're using.
+Please note that **Zabbix Proxy Script** requires a Ubuntu or CentOS7/8 operating system, depending on which platform you're using.
 
 ```sh
 First grant executable permissions using chmod +x zabbix_proxy_6.2.sh
@@ -35,6 +35,6 @@ To set variables without prompting the user:
 
 ## License
 
-GPL-3.0
+This software is licensed under GPL-3.0
 
 **Made with ♥ by bygalacos**
