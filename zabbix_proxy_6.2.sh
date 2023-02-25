@@ -15,6 +15,7 @@ if [[ $(grep -Ei 'centos|red hat' /etc/*release) ]]; then
   # Install Zabbix proxy & MariaDB on CentOS
   clear
   setenforce 0 && sed -i 's/^SELINUX=.*/SELINUX=permissive/g' /etc/selinux/config
+  yum install -y ca-certificates
   rpm -Uvh https://repo.zabbix.com/zabbix/6.2/rhel/$(rpm -E %{rhel})/x86_64/zabbix-release-6.2-3.el$(rpm -E %{rhel}).noarch.rpm
   curl -s https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash /dev/stdin --mariadb-server-version=10.6
   clear
@@ -41,13 +42,14 @@ EOF
   fi
   hostname=$(hostname)
 
-  # Replace Server, Hostname, DBHost and DBPassword in zabbix proxy configuration file
+  # Replace Server, Hostname, DBHost and DBPassword in Zabbix Proxy configuration file
   sed -i "s/Server=127.0.0.1/Server=$server_ip/g" /etc/zabbix/zabbix_proxy.conf
   sed -i "s/Hostname=Zabbix proxy/Hostname=$hostname/g" /etc/zabbix/zabbix_proxy.conf
   # DBUser & DBName already specified.
   sed -i "s/# DBHost=localhost/DBHost=localhost/g" /etc/zabbix/zabbix_proxy.conf
   sed -i "s/# DBPassword=/DBPassword=zabbix/g" /etc/zabbix/zabbix_proxy.conf
 
+  # Restart Zabbix Proxy
   systemctl restart zabbix-proxy && systemctl enable zabbix-proxy
   clear
   systemctl status zabbix-proxy
@@ -87,13 +89,14 @@ EOF
   fi
   hostname=$(hostname)
 
-  # Replace Server, Hostname, DBHost and DBPassword in zabbix proxy configuration file
+  # Replace Server, Hostname, DBHost and DBPassword in Zabbix Proxy configuration file
   sed -i "s/Server=127.0.0.1/Server=$server_ip/g" /etc/zabbix/zabbix_proxy.conf
   sed -i "s/Hostname=Zabbix proxy/Hostname=$hostname/g" /etc/zabbix/zabbix_proxy.conf
   # DBUser & DBName already specified.
   sed -i "s/# DBHost=localhost/DBHost=localhost/g" /etc/zabbix/zabbix_proxy.conf
   sed -i "s/# DBPassword=/DBPassword=zabbix/g" /etc/zabbix/zabbix_proxy.conf
 
+  # Restart Zabbix Proxy
   systemctl restart zabbix-proxy && systemctl enable zabbix-proxy
   clear
   systemctl status zabbix-proxy
